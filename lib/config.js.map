@@ -1,0 +1,1 @@
+{"version":3,"sources":["../src/config.js"],"names":[],"mappings":";;;;;;;;;AAKO,IAAM,sBAAO,QAAQ,GAAR,CAAY,SAAZ,IAAyB,IAAtC","file":"config.js","sourcesContent":["/**\n * 配置文件\n */\n\n\nexport const port = process.env.SITE_PORT || 5757;\n"]}
