@@ -7,15 +7,19 @@
  * LICENSE.txt file in the root directory of this source tree.
  */
 
-import React from 'react';
-import Contact from './Contact';
+import DataType from 'sequelize';
+import Model from '../sequelize';
 
-export default {
+const UserClaim = Model.define('UserClaim', {
 
-  path: '/contact',
-
-  action() {
-    return <Contact />;
+  type: {
+    type: DataType.STRING,
   },
 
-};
+  value: {
+    type: DataType.STRING,
+  },
+
+});
+
+export default UserClaim;

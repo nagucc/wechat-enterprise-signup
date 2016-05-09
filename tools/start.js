@@ -30,24 +30,23 @@ async function start() {
     // Patch the client-side bundle configurations
     // to enable Hot Module Replacement (HMR) and React Transform
     webpackConfig.filter(x => x.target !== 'node').forEach(config => {
-      if (Array.isArray(config.entry)) {
-        config.entry.unshift('webpack-hot-middleware/client');
-      } else {
-        /* eslint-disable no-param-reassign */
-        config.entry = ['webpack-hot-middleware/client', config.entry];
-        /* eslint-enable no-param-reassign */
-      }
-
+      /* eslint-disable no-param-reassign */
+      config.entry = ['webpack-hot-middleware/client'].concat(config.entry);
+      config.output.filename = config.output.filename.replace('[chunkhash]', '[hash]');
+      config.output.chunkFilename = config.output.chunkFilename.replace('[chunkhash]', '[hash]');
       config.plugins.push(new webpack.HotModuleReplacementPlugin());
       config.plugins.push(new webpack.NoErrorsPlugin());
       config
         .module
         .loaders
         .filter(x => x.loader === 'babel-loader')
-        .forEach(x => (x.query = { // eslint-disable-line no-param-reassign
+        .forEach(x => (x.query = {
+          ...x.query,
+
           // Wraps all React components into arbitrary transforms
           // https://github.com/gaearon/babel-plugin-react-transform
           plugins: [
+            ...(x.query ? x.query.plugins : []),
             ['react-transform', {
               transforms: [
                 {
@@ -63,6 +62,7 @@ async function start() {
             ],
           ],
         }));
+      /* eslint-enable no-param-reassign */
     });
 
     const bundler = webpack(webpackConfig);

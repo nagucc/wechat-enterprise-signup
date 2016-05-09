@@ -7,15 +7,15 @@
  * LICENSE.txt file in the root directory of this source tree.
  */
 
-import React from 'react';
-import Contact from './Contact';
+@import '../../components/variables.scss';
 
-export default {
+.root {
+  padding-left: 20px;
+  padding-right: 20px;
+}
 
-  path: '/contact',
-
-  action() {
-    return <Contact />;
-  },
-
-};
+.container {
+  margin: 0 auto;
+  padding: 0 0 40px;
+  max-width: $max-content-width;
+}

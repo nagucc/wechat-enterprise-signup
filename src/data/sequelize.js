@@ -7,15 +7,13 @@
  * LICENSE.txt file in the root directory of this source tree.
  */
 
-import React from 'react';
-import Contact from './Contact';
+import Sequelize from 'sequelize';
+import { databaseUrl } from '../config';
 
-export default {
-
-  path: '/contact',
-
-  action() {
-    return <Contact />;
+const sequelize = new Sequelize(databaseUrl, {
+  define: {
+    freezeTableName: true,
   },
+});
 
-};
+export default sequelize;
