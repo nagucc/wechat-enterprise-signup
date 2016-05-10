@@ -52,8 +52,11 @@ class App extends Component {
 
   render() {
     return !this.props.error ? (
-      <div className="container">
+      <div>
+        <Header />
         {this.props.children}
+        <Feedback />
+        <Footer />
       </div>
     ) : this.props.children;
   }
