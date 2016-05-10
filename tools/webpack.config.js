@@ -64,6 +64,7 @@ const config = {
             'stage-0',
           ],
           plugins: [
+            'add-module-exports', // 处理require default的问题
             'transform-runtime',
             ...DEBUG ? [] : [
               'transform-react-remove-prop-types',

@@ -77,6 +77,10 @@ app.use('/graphql', expressGraphQL(req => ({
   pretty: process.env.NODE_ENV !== 'production',
 })));
 
+
+// 注册API
+app.use('/api/signup', require('./api/wxent-signup'));
+
 //
 // Register server-side rendering middleware
 // -----------------------------------------------------------------------------

@@ -51,9 +51,7 @@ export const wxentConfig = {
   corpId: process.env.WXE_CORPID,
   secret: process.env.WXE_SECRET,
   agentId: process.env.WXE_AGENTID || 0,
-  token: process.env.WXE_TOKEN || 'zAGTHr1H6adprX33J',
-  encodingAESKey: process.env.WXE_AES_KEY || 'H2GL9I42k1CTFiQVizcxdeotXSIBmaMtpqT5Kz172An',
-  departmentId: process.env.NEW_USER_DEPARTMENT_ID || 1
+  departmentId: process.env.NEW_USER_DEPARTMENT_ID || '[1]'
 };
 
 export const redis = {

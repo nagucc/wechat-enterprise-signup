@@ -1,7 +1,33 @@
 import React, { PropTypes } from 'react'
-import {Form, FormCell, CellHeader, Label, CellBody, Input, Button, ButtonArea} from 'react-weui';
+import {Form, FormCell, CellHeader,
+  Label, CellBody, Input, Button, ButtonArea,
+  MediaBox, MediaBoxDescription} from 'react-weui';
+import fetch from 'isomorphic-fetch';
 
 const Home = React.createClass({
+  async signup () {
+    let name = this.refs.name.value;
+    let mobile = this.refs.mobile.value;
+    let body = new FormData();
+    body.append('name', name);
+    body.append('mobile', mobile);
+
+    const res = await fetch('/api/signup', {
+        method: 'PUT',
+        body: JSON.stringify({name, mobile}),
+        headers: {
+          'Accept': 'application/json',
+          'Content-Type': 'application/json'
+        }
+      });
+    if(res.status === 200){
+      alert('注册成功');
+    } else {
+      let text = await res.text();
+      alert('注册失败:' + text);
+    }
+
+  },
   render () {
     return (
       <div className="form">
@@ -15,7 +41,7 @@ const Home = React.createClass({
                 <Label>姓名</Label>
               </CellHeader>
               <CellBody>
-                <Input placeholder="请输入姓名" />
+                <input className="weui_input" placeholder="请输入姓名" ref="name"/>
               </CellBody>
             </FormCell>
             <FormCell>
@@ -23,14 +49,18 @@ const Home = React.createClass({
                 <Label>手机号</Label>
               </CellHeader>
               <CellBody>
-                <Input type="tel" placeholder="请输入手机号码"/>
+                <input className="weui_input" type="tel" placeholder="请输入手机号码" ref="mobile"/>
               </CellBody>
             </FormCell>
             <ButtonArea>
-              <Button type="primary">确定</Button>
+              <Button type="primary" onClick={this.signup}>确定</Button>
             </ButtonArea>
           </Form>
-
+          <MediaBox>
+            <MediaBoxDescription>
+              注册成功后，请点击“关注身份验证”，然后使用手机号验证即可。
+            </MediaBoxDescription>
+          </MediaBox>
         </div>
       </div>
     )
