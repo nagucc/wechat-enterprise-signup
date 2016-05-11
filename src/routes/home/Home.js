@@ -30,9 +30,11 @@ class Home extends React.Component {
           'Content-Type': 'application/json'
         }
       });
+
     if(res.status === 200){
       if(successUrl) window.location = successUrl;
       else {
+        this.setState({loading:false});
         alert('注册成功');
         window.close();
       }
@@ -76,7 +78,7 @@ class Home extends React.Component {
           </Form>
           <MediaBox>
             <MediaBoxDescription>
-              注册成功后，请点击“关注身份验证”，然后使用手机号验证即可。
+              <b>注册成功后，请点击“关注身份验证”，然后使用手机号验证即可。</b>
             </MediaBoxDescription>
           </MediaBox>
         </div>
