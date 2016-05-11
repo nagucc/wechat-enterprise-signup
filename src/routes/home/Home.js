@@ -4,7 +4,12 @@ import {Form, FormCell, CellHeader,
   MediaBox, MediaBoxDescription} from 'react-weui';
 import fetch from 'isomorphic-fetch';
 
+import {title} from '../../config';
+
 const Home = React.createClass({
+  contextTypes: {
+    setTitle: PropTypes.func.isRequired
+  },
   async signup () {
     let name = this.refs.name.value;
     let mobile = this.refs.mobile.value;
@@ -27,6 +32,9 @@ const Home = React.createClass({
       alert('注册失败:' + text);
     }
 
+  },
+  componentDidMount() {
+    this.context.setTitle(title);
   },
   render () {
     return (

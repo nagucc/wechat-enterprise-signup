@@ -63,3 +63,4 @@ export const defaultMessage = process.env.DEFAULT_MESSAGE || '欢迎使用云大
 export const welcomeMessage = process.env.WELCOME_MESSAGE || '欢迎使用自助注册。';
 export const doneMessage = process.env.DONE_MESSAGE || '您已成功注册!';
 export const helpMessage = process.env.HELP_MESSAGE || '如需帮助，请拨打65031141。'
+export const title = process.env.TITLE || '微信企业号自助注册';
