@@ -13,6 +13,7 @@ import App from '../components/App';
 // Child routes
 import home from './home';
 import error from './error';
+import selectTags from './select-tags';
 
 export default {
 
@@ -21,6 +22,7 @@ export default {
   children: [
     home,
     error,
+    selectTags,
   ],
 
   async action({ next, render, context }) {
