@@ -1,15 +1,19 @@
 import React, { PropTypes } from 'react'
 import {Form, FormCell, CellHeader,
   Label, CellBody, Input, Button, ButtonArea,
-  MediaBox, MediaBoxDescription} from 'react-weui';
+  MediaBox, MediaBoxDescription, Toast} from 'react-weui';
 import fetch from 'isomorphic-fetch';
 
-import {title} from '../../config';
+import {title, successUrl} from '../../config';
 
-const Home = React.createClass({
-  contextTypes: {
+class Home extends React.Component {
+  static contextTypes = {
     setTitle: PropTypes.func.isRequired
-  },
+  }
+  constructor(props) {
+    super(props);
+    this.state = {loading: false};
+  }
   async signup () {
     let name = this.refs.name.value;
     let mobile = this.refs.mobile.value;
@@ -17,6 +21,7 @@ const Home = React.createClass({
     body.append('name', name);
     body.append('mobile', mobile);
 
+    this.setState({loading: true});
     const res = await fetch('/api/signup', {
         method: 'PUT',
         body: JSON.stringify({name, mobile}),
@@ -26,16 +31,21 @@ const Home = React.createClass({
         }
       });
     if(res.status === 200){
-      alert('注册成功');
+      if(successUrl) window.location = successUrl;
+      else {
+        alert('注册成功');
+        window.close();
+      }
     } else {
       let text = await res.text();
+      this.setState({loading: false});
       alert('注册失败:' + text);
     }
 
-  },
+  }
   componentDidMount() {
     this.context.setTitle(title);
-  },
+  }
   render () {
     return (
       <div className="form">
@@ -61,7 +71,7 @@ const Home = React.createClass({
               </CellBody>
             </FormCell>
             <ButtonArea>
-              <Button type="primary" onClick={this.signup}>确定</Button>
+              <Button type="primary" onClick={this.signup.bind(this)}>确定</Button>
             </ButtonArea>
           </Form>
           <MediaBox>
@@ -70,9 +80,10 @@ const Home = React.createClass({
             </MediaBoxDescription>
           </MediaBox>
         </div>
+        <Toast icon="loading" show={this.state.loading}>请稍候</Toast>
       </div>
     )
   }
-})
+}
 
-export default Home
+export default Home;
