@@ -1,6 +1,5 @@
 FROM node
 
-ADD *.js /jkef/
 ADD *.json /jkef/
 ADD src /jkef/src
 ADD tools /jkef/tools
