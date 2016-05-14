@@ -23,7 +23,7 @@ import models from './data/models';
 import schema from './data/schema';
 import routes from './routes';
 import assets from './assets';
-import { port, auth, analytics } from './config';
+import { port, auth, analytics, cookieSecret } from './config';
 
 const app = express();
 
@@ -38,7 +38,7 @@ global.navigator.userAgent = global.navigator.userAgent || 'all';
 // Register Node.js middleware
 // -----------------------------------------------------------------------------
 app.use(express.static(path.join(__dirname, 'public')));
-app.use(cookieParser());
+app.use(cookieParser(cookieSecret));
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
 
