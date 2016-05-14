@@ -65,3 +65,7 @@ export const doneMessage = process.env.DONE_MESSAGE || '您已成功注册!';
 export const helpMessage = process.env.HELP_MESSAGE || '如需帮助，请拨打65031141。'
 export const title = process.env.TITLE || '微信企业号自助注册';
 export const successUrl = process.env.SUCCESS_URL;
+
+
+export const selectableTags = JSON.parse(process.env.SELECTABLE_TAGS  || '[2,3]' )
+export const cookieSecret = process.env.COOKIE_SECRET || 'secret';
