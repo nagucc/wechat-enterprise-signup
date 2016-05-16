@@ -1,14 +1,14 @@
 
-
+/*
+实现从微信企业号登录
+ */
 export const signin = ({wxapi, cookieNameForUserId = 'userId', callbackUrl}) => {
   return (req, res) => {
     if(!callbackUrl) {
       callbackUrl = `${req.protocol}://${req.get('Host')}${req.originalUrl}}`
     }
-    console.log('start')
     // 1. 判断是否带有code参数，如果是的话，则说明已经从认证服务器返回
     if('code' in req.query){
-      console.log('code in')
       // 使用state验证请求是否合法
       if(req.signedCookies.state === req.query.state)
         // 使用code获取userId
@@ -31,11 +31,9 @@ export const signin = ({wxapi, cookieNameForUserId = 'userId', callbackUrl}) => 
     }
     // 2. 无'code'参数，转向认证服务器进行认证
     else {
-      console.log('auth')
       // 2.1 缓存 state 和redirect_uri
       let {redirect_uri} = req.query;
       if(redirect_uri) {
-        console.log('redirect_uri go')
         let state = Math.random().toString();
 
         // 将state 和 redirect_uri 存入cookie中
@@ -62,7 +60,9 @@ export const signin = ({wxapi, cookieNameForUserId = 'userId', callbackUrl}) => 
   }
 }
 
-
+/*
+获取当前登录用户的userId
+ */
 export const getme = ({cookieNameForUserId = 'userId'} = {}) => {
   return (req, res) => {
     var userId = req.signedCookies[cookieNameForUserId];
