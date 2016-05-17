@@ -69,3 +69,8 @@ export const successUrl = process.env.SUCCESS_URL;
 
 export const selectableTags = JSON.parse(process.env.SELECTABLE_TAGS  || '[2,3]' )
 export const cookieSecret = process.env.COOKIE_SECRET || 'secret';
+export const selectTagsPage = {
+  title: process.env.SELECT_TAGS_TITLE || '选择标签',
+  desc: process.env.SELECT_TAGS_DESC || '请选择标签',
+  helpText: process.env.SELECT_TAGS_HELPTEXT || '更改标签后，重新进入企业号即可看到相应的应用。'
+}
