@@ -46,10 +46,7 @@ router.get('/selectable-tags', async(req, res) => {
 router.get('/signin', signin({
   wxapi: wxapi,
   cookieNameForUserId: 'userId',
-  // callbackUrl: 'http://wx.nagu.cc:3001/api/signup/signin'
-  callbackUrl: process.env.NODE_ENV === 'production'
-    ? `http://${host}/api/signup/signin`
-    : 'http://wx.nagu.cc:3001/api/signup/signin'
+  callbackUrl: `http://${host}/api/signup/signin`
 }));
 
 router.put('/add-tags', async (req, res) => {
