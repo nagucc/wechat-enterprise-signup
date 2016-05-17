@@ -1,4 +1,4 @@
-FROM node
+FROM node:5
 
 ADD *.json /jkef/
 ADD src /jkef/src

@@ -17,9 +17,6 @@ class Home extends React.Component {
   async signup () {
     let name = this.refs.name.value;
     let mobile = this.refs.mobile.value;
-    let body = new FormData();
-    body.append('name', name);
-    body.append('mobile', mobile);
 
     this.setState({loading: true});
     const res = await fetch('/api/signup', {
@@ -35,7 +32,9 @@ class Home extends React.Component {
       if(successUrl) window.location = successUrl;
       else {
         this.setState({loading:false});
-        alert('注册成功');
+        alert('注册成功，请返回企业号首页进行身份验证。');
+        this.refs.name.value = '';
+        this.refs.mobile.value = '';
         window.close();
       }
     } else {
